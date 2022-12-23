@@ -28,12 +28,12 @@ class Matrix {
         explicit Proxy(Matrix& matrix) : _matrix(matrix), _dimension(0) {};
         ~Proxy() = default;
 
-        void first_index(std::size_t index) {
+        void first_index_part(std::size_t index_part) {
             _dimension = 0;
-            _index[_dimension] = index;
+            _index[_dimension] = index_part;
         }
-        Proxy& operator[](std::size_t index) {
-            _index[++_dimension] = index;//next index
+        Proxy& operator[](std::size_t index_part) {
+            _index[++_dimension] = index_part;//next index part
             return *this;
         }
         operator T() {
@@ -55,8 +55,8 @@ public:
     Matrix() = default;
     ~Matrix() = default;
 
-    Proxy& operator[](std::size_t index) {
-        _proxy.first_index(index);
+    Proxy& operator[](std::size_t index_part) {
+        _proxy.first_index_part(index_part);
         return _proxy;
     }
     iterator begin() {
